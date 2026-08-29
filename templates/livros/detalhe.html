@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ livro.titulo }} - Biblioteca{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="row g-0">
+        <div class="col-md-4 text-center p-4 bg-light d-flex align-items-center justify-content-center">
+            {% if livro.tem_capa %}
+            <img src="{{ livro.capa_url }}" class="img-fluid rounded shadow" alt="{{ livro.titulo }}" style="max-height: 400px;">
+            {% else %}
+            <div class="bg-secondary text-white p-5 rounded w-100">Sem Imagem de Capa</div>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h2 class="card-title mb-1">{{ livro.titulo }}</h2>
+                        <h5 class="text-muted mb-3">{{ livro.autores }}</h5>
+                    </div>
+                    {% if livro.openlibrary_id %}
+                    <span class="badge bg-info text-dark">Open Library: {{ livro.openlibrary_id }}</span>
+                    {% endif %}
+                </div>
+
+                <hr>
+
+                <div class="row mb-3">
+                    {% if livro.ano_publicacao %}
+                    <div class="col-sm-6 mb-2"><strong>Ano de Publicação:</strong> {{ livro.ano_publicacao }}</div>
+                    {% endif %}
+                    {% if livro.isbn %}
+                    <div class="col-sm-6 mb-2"><strong>ISBN:</strong> {{ livro.isbn }}</div>
+                    {% endif %}
+                    {% if livro.editora %}
+                    <div class="col-sm-6 mb-2"><strong>Editora:</strong> {{ livro.editora }}</div>
+                    {% endif %}
+                    {% if livro.assuntos %}
+                    <div class="col-sm-12 mb-2"><strong>Assuntos:</strong> {{ livro.assuntos }}</div>
+                    {% endif %}
+                </div>
+
+                {% if livro.descricao %}
+                <div class="mb-4">
+                    <h6>Descrição</h6>
+                    <p class="text-secondary" style="white-space: pre-line;">{{ livro.descricao }}</p>
+                </div>
+                {% endif %}
+
+                <div class="d-flex gap-2 flex-wrap pt-3 border-top">
+                    {% if user.is_authenticated %}
+                        {% if favorito_usuario %}
+                        <a href="{% url 'favoritos:editar' favorito_usuario.pk %}" class="btn btn-warning">
+                            ⭐ Em seus favoritos (Nota: {{ favorito_usuario.nota|default:"Sem nota" }})
+                        </a>
+                        {% else %}
+                        <form method="post" action="{% url 'favoritos:adicionar' livro.pk %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-warning">⭐ Favoritar Livro</button>
+                        </form>
+                        {% endif %}
+
+                        <a href="{% url 'livros:editar' livro.pk %}" class="btn btn-outline-secondary">Editar Livro</a>
+                        <a href="{% url 'livros:excluir' livro.pk %}" class="btn btn-outline-danger">Excluir Livro</a>
+                    {% endif %}
+                    <a href="{% url 'livros:lista' %}" class="btn btn-secondary ms-auto">Voltar ao Catálogo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
