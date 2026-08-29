@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-# Create your models here.
+
 class Livro(models.Model):
     openlibrary_id = models.CharField(
         max_length=100,
@@ -9,14 +9,15 @@ class Livro(models.Model):
         blank=True,
         null=True,
         verbose_name='Open Library ID'
-        )
+    )
     titulo = models.CharField(
         max_length=255,
-        verbose_name='Título')
+        verbose_name='Título'
+    )
     autores = models.CharField(
         max_length=255,
-        verbose_name='Autores',
-        )
+        verbose_name='Autores'
+    )
     capa_url = models.URLField(
         max_length=500,
         blank=True,
@@ -46,11 +47,11 @@ class Livro(models.Model):
 
     def __str__(self):
         if self.autores:
-            return f"{self.titulo} - {self.autores}"
+            return f"{self.titulo} — {self.autores}"
         return self.titulo
 
     def get_absolute_url(self):
-        return reverse('livro_detalhe', kwargs={'pk': self.pk})
+        return reverse('livros:detalhe', kwargs={'pk': self.pk})
 
     @property
     def tem_capa(self):
