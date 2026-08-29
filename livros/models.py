@@ -28,6 +28,16 @@ class Livro(models.Model):
         blank=True,
         verbose_name='ISBN'
     )
+    editora = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name='Editora'
+    )
+    ano_publicacao = models.IntegerField(
+        null=True,
+        blank=True,
+        verbose_name='Ano de Publicação'
+    )
     descricao = models.TextField(
         blank=True,
         verbose_name='Descrição'

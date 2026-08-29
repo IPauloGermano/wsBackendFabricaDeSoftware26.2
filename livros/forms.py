@@ -5,7 +5,7 @@ from .models import Livro
 class LivroForm(forms.ModelForm):
     class Meta:
         model = Livro
-        fields = ['titulo', 'autores', 'capa_url', 'isbn', 'descricao', 'assuntos']
+        fields = ['titulo', 'autores', 'ano_publicacao', 'editora', 'isbn', 'capa_url', 'assuntos', 'descricao']
         widgets = {
             'titulo': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -15,21 +15,29 @@ class LivroForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Nome do(s) autor(es)',
             }),
-            'capa_url': forms.URLInput(attrs={
+            'ano_publicacao': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'https://exemplo.com/capa.jpg (opcional)',
+                'placeholder': 'Ex: 1899',
+            }),
+            'editora': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Editora (opcional)',
             }),
             'isbn': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'ISBN (opcional)',
             }),
-            'descricao': forms.Textarea(attrs={
+            'capa_url': forms.URLInput(attrs={
                 'class': 'form-control',
-                'rows': 4,
-                'placeholder': 'Descrição ou sinopse do livro...',
+                'placeholder': 'https://exemplo.com/capa.jpg (opcional)',
             }),
             'assuntos': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Ex: Literatura Brasileira, Romance, Ficção',
+            }),
+            'descricao': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Descrição ou sinopse do livro...',
             }),
         }
