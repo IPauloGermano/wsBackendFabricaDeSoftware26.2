@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Local Apps
     'livros.apps.LivrosConfig',
+    'favoritos.apps.FavoritosConfig',
 ]
 
 MIDDLEWARE = [
