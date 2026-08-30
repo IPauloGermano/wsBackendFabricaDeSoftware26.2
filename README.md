@@ -36,7 +36,7 @@ Sistema web desenvolvido em Django para gerenciamento de catálogo de livros e a
 ### 1. Clonar o Repositório
 ```bash
 git clone <URL_DO_REPOSITORIO>
-cd hand
+cd wsBackendFabricaDeSoftware26.2
 ```
 
 ### 2. Criar e Ativar o Ambiente Virtual
