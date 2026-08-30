@@ -27,6 +27,9 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'favoritos:lista' %}">Meus Favoritos</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'livros:criar' %}">+ Novo Livro</a>
                     </li>
                     {% endif %}
@@ -49,6 +52,9 @@
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'favoritos:registro' %}">Cadastrar</a>
                     </li>
                     {% endif %}
                 </ul>
